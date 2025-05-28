@@ -1,0 +1,27 @@
+{
+  "name": "vite-plugin-component-id",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "vite",
+    "plugin",
+    "vue",
+    "component-id"
+  ],
+  "dependencies": {
+    "lodash-es": "^4.17.21"
+  },
+  "peerDependencies": {
+    "vite": "^4.0.0 || ^5.0.0",
+    "@vitejs/plugin-vue": "^4.0.0 || ^5.0.0"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.12",
+    "@types/node": "^22.15.23",
+    "typescript": "^5.0.0"
+  }
+}
