@@ -12,6 +12,8 @@
     "vue",
     "component-id"
   ],
+  "author": "Archit Jain",
+  "homepage": "https://github.com/architjee/vue-component-id-plugin",
   "dependencies": {
     "lodash-es": "^4.17.21"
   },
