@@ -42,9 +42,15 @@ export function vueWithComponentIds(options = {}) {
             compilerOptions: {
                 nodeTransforms: [
                     (node, context) => {
-                        const filename = context.filename;
-                        const id = getOrCreateId(path.relative(process.cwd(), filename));
-                        return createDataComponentIdTransform(id)(node, context);
+                        if (node.type === NodeTypes.ROOT && node.children.length) {
+                            const filename = context.filename;
+                            const id = getOrCreateId(path.relative(process.cwd(), filename));
+                            for (const child of node.children) {
+                                if (child.type === NodeTypes.ELEMENT) {
+                                    createDataComponentIdTransform(id)(child, context);
+                                }
+                            }
+                        }
                     },
                 ],
             },
