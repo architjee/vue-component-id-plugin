@@ -1,16 +1,21 @@
+Here’s the updated README with your introduction and cleaned-up formatting:
+
+---
+
 # Vue Component ID Plugin
 
-A Vite plugin for Vue 3 that automatically adds a unique `data-component-id` attribute to your components during compilation.
+_A drop-in replacement for the Vue plugin in Vite that adds a unique `data-component-id` to each component—useful for testing, debugging, or custom tooling._
 
 ## Features
 
-- Automatically generates a unique ID for each Vue component based on its file path.
-- Adds a `data-component-id` attribute to the root element of each component.
-- Useful for testing, debugging, and styling specific component instances.
+- 🔒 Adds a unique `data-component-id` to the **root** of each Vue component (Now also supports Fragment components)
+- 🧪 Great for **testing**, **debugging**, and **automation**
+- 🪄 Works as a drop-in replacement for `@vitejs/plugin-vue`
+- 💾 Maintains a stable map of component IDs across builds
+
+---
 
 ## Installation
-
-Install the plugin using npm or yarn:
 
 ```bash
 npm install vue-component-id-plugin --save-dev
@@ -18,99 +23,87 @@ npm install vue-component-id-plugin --save-dev
 yarn add vue-component-id-plugin --dev
 ```
 
+---
+
 ## Usage
 
-Add the plugin to your `vite.config.js` or `vite.config.ts` file. This plugin acts as a drop-in replacement for `@vitejs/plugin-vue` and includes its functionality, so you only need to include `vueWithComponentIds()` in your plugins array.
+Replace `@vitejs/plugin-vue` in your `vite.config.js` or `vite.config.ts` with `vueWithComponentIds`:
 
-```javascript
-// vite.config.js
-import { defineConfig } from 'vite';
-import { vueWithComponentIds } from 'vue-component-id-plugin';
-
-export default defineConfig({
-  plugins: [
-    vueWithComponentIds()
-  ],
-});
-```
-
-```typescript
+```ts
 // vite.config.ts
-import { defineConfig } from 'vite';
-import { vueWithComponentIds } from 'vue-component-id-plugin';
+import { defineConfig } from "vite";
+import { vueWithComponentIds } from "vue-component-id-plugin";
 
 export default defineConfig({
-  plugins: [
-    vueWithComponentIds()
-  ],
+  plugins: [vueWithComponentIds()],
 });
 ```
 
-## Comparison with `@vitejs/plugin-vue`
+---
 
-Here's a simple comparison showing how to replace `@vitejs/plugin-vue` with `vueWithComponentIds` in your `vite.config.ts`:
+## Quick Diff Example
 
 ```diff
---- a/vite.config.ts
-+++ b/vite.config.ts
-@@ -1,7 +1,6 @@
- import { defineConfig } from 'vite';
--import vue from '@vitejs/plugin-vue';
-+import { vueWithComponentIds } from 'vue-component-id-plugin';
- 
- export default defineConfig({
-   plugins: [
--    vue(),
-+    vueWithComponentIds(),
-   ],
- });
+- import vue from '@vitejs/plugin-vue';
++ import { vueWithComponentIds } from 'vue-component-id-plugin';
+
+export default defineConfig({
+  plugins: [
+-   vue(),
++   vueWithComponentIds(),
+  ],
+});
 ```
+
+---
 
 ## Options
 
-You can pass an options object to the `vueWithComponentIds` function:
-
-```typescript
+```ts
 export interface ComponentIdOptions {
   /**
-   * Path to the JSON file where component IDs will be mapped to file paths.
-   * Defaults to './component-id-map.json'.
+   * Path to the JSON file that maps component file paths to generated IDs.
+   * Default: './component-id-map.json'
    */
   idMapPath?: string;
+
   /**
-   * Options to pass to the @vitejs/plugin-vue plugin.
+   * Pass-through options to the underlying @vitejs/plugin-vue plugin.
    */
   vueOptions?: VuePluginOptions;
 }
 ```
 
-Example with options:
+Example:
 
-```javascript
-// vite.config.js
-import { defineConfig } from 'vite';
-import { vueWithComponentIds } from 'vue-component-id-plugin';
-
-export default defineConfig({
-  plugins: [
-    vueWithComponentIds({
-      idMapPath: './my-component-ids.json',
-      vueOptions: { /* options to pass directly to @vitejs/plugin-vue */ }
-    }),
-  ],
+```ts
+vueWithComponentIds({
+  idMapPath: "./my-component-ids.json",
+  vueOptions: {
+    reactivityTransform: true,
+  },
 });
 ```
 
-**Note:** Do not include both `vueWithComponentIds()` and `@vitejs/plugin-vue` in your plugins array—`vueWithComponentIds()` already includes all functionality of `@vitejs/plugin-vue`.
+---
 
-## How it works
+## How it Works
 
-The plugin hooks into the Vue compiler and adds a `data-component-id` attribute to the root element of each component template. The ID is generated based on the relative path of the component file from the project root and is stored in a JSON file (`component-id-map.json` by default) to maintain consistent IDs across builds.
+- During build or dev, the plugin uses Vue's compiler hooks to inject a `data-component-id="..."` attribute on your component’s root HTML element.
+- The ID is based on a hash of the file path and saved in a local JSON file to ensure consistency across builds.
+
+---
 
 ## Contributing
 
-Feel free to open issues or pull requests if you have suggestions or find bugs.
+We welcome PRs and issues! If you have suggestions, bug reports, or improvements, feel free to open an issue or submit a pull request.
+
+---
 
 ## License
 
-[Specify your license here, e.g., MIT License]
+MIT License
+
+---
+
+Let me know if you want a badge (e.g., `npm version`, `MIT`, `made with vite`) or a usage GIF for the top.
