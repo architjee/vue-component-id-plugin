@@ -8,7 +8,7 @@ _A drop-in replacement for the Vue plugin in Vite that adds a unique `data-compo
 
 ## Features
 
-- 🔒 Adds a unique `data-component-id` to the **root** of each Vue component
+- 🔒 Adds a unique `data-component-id` to the **root** of each Vue component (Now also supports Fragment components)
 - 🧪 Great for **testing**, **debugging**, and **automation**
 - 🪄 Works as a drop-in replacement for `@vitejs/plugin-vue`
 - 💾 Maintains a stable map of component IDs across builds
