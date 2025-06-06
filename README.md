@@ -27,7 +27,7 @@ yarn add vue-plugin-component-id --dev
 ---
 
 <p align="center">
-  <img src="assets/Screenshot.png" alt="Screenshot of Vue Component ID Plugin in action" style="max-width:700px; width:100%;" />
+  <img src="https://raw.githubusercontent.com/architjee/vue-component-id-plugin/main/assets/Screenshot.png" alt="Screenshot of Vue Component ID Plugin in action" style="max-width:700px; width:100%;" />
 </p>
 
 ---
